@@ -13,7 +13,7 @@ CheckBox{
 
     onRectChanged: {
         if(rect){
-            x = rect.x + textarea.tabStopDistance - width - 1
+            x = rect.x + textarea.tabStopDistance - width - textmetrics.getWidth(" ")
             y = rect.y + ((rect.height - height)/2)
             visible = true
         } else {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 11.0.0, 2023-08-08T23:02:23. -->
+<!-- Written by QtCreator 11.0.0, 2023-08-11T00:46:09. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -812,6 +812,7 @@
     <value type="int" key="PE.EnvironmentAspect.Base">0</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">appKiwiNotes</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.AndroidRunConfiguration:appKiwiNotes</value>
     <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">appKiwiNotes</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

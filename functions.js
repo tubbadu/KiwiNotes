@@ -70,16 +70,19 @@ function assignCheckboxes(){
 }
 
 function processToRichText(text){
+    const regex = textarea.regex;
     let tout = text.replace(/\u2028/g, "\n"); // remove this stupid strange character and use newline instead
 
     tout = tout.replace(textarea.d["CheckBoxOff"]["regex"], (match) => {
-        let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match)
+                            console.warn(`<${match}>`)
+        let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
         return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
     });
     tout = tout.replace(textarea.d["CheckBoxOn"]["regex"], (match) => {
-        let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match)
+        let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
         return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
     });
+    tout = tout.replace(textarea)
 
     tout = tout.replace(/\n/g, "<br>"); // display correctly newlines in RichText
     return tout;

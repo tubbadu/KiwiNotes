@@ -85,6 +85,14 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`.re
             }
         }
 
+        readonly property var regex: {
+            "CheckBoxOn": /^(?:\t| )*[-*+] \[x\] /gm,
+            "CheckBoxOff": /^(?:\t| )*[-*+] \[ \] /gm,
+            "Header": /^(?:\t| )*#+ .*$/gm,
+            "DotList": /^(?:\t| )*[-*+] /gm,
+            "Quote": /^(?:\t| )*> /gm
+        }
+
         wrapMode: TextEdit.Wrap
         tabStopDistance: 30 // TODO make it compatible with everything
 
@@ -101,7 +109,7 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`.re
             id: textmetrics
             function getWidth(t){
                 text = t
-                return width;
+                return advanceWidth ;
             }
         }
     }
