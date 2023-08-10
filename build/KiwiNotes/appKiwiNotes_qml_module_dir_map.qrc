@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/KiwiNotes">/home/tubbadu/code/Qt/KiwiNotes/build/KiwiNotes</file>
+
+  </qresource>
+</RCC>

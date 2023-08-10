@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  ".rcc/qmlcache/appKiwiNotes_Block_qml.cpp"
+  ".rcc/qmlcache/appKiwiNotes_Document_qml.cpp"
+  ".rcc/qmlcache/appKiwiNotes_Main_qml.cpp"
+  ".rcc/qmlcache/appKiwiNotes_qmlcache_loader.cpp"
+  ".rcc/qrc_appKiwiNotes_raw_qml_0.cpp"
+  ".rcc/qrc_qmake_KiwiNotes.cpp"
+  "CMakeFiles/appKiwiNotes_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/appKiwiNotes_autogen.dir/ParseCache.txt"
+  "appKiwiNotes_autogen"
+  "CMakeFiles/appKiwiNotes.dir/appKiwiNotes_autogen/mocs_compilation.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/appKiwiNotes_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/appkiwinotes_qmltyperegistrations.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/appkiwinotes_qmltyperegistrations.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_Block_qml.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_Block_qml.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_Document_qml.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_Document_qml.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_Main_qml.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_Main_qml.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_qmlcache_loader.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qmlcache/appKiwiNotes_qmlcache_loader.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qrc_appKiwiNotes_raw_qml_0.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qrc_appKiwiNotes_raw_qml_0.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qrc_qmake_KiwiNotes.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/build/.rcc/qrc_qmake_KiwiNotes.cpp.o.d"
+  "CMakeFiles/appKiwiNotes.dir/main.cpp.o"
+  "CMakeFiles/appKiwiNotes.dir/main.cpp.o.d"
+  "KiwiNotes/appKiwiNotes.qmltypes"
+  "appKiwiNotes"
+  "appKiwiNotes.pdb"
+  "appkiwinotes_qmltyperegistrations.cpp"
+  "meta_types/qt6appkiwinotes_metatypes.json"
+  "meta_types/qt6appkiwinotes_metatypes.json.gen"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/appKiwiNotes.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

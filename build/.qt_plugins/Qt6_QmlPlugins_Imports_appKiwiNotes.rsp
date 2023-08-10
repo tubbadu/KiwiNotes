@@ -1,0 +1,14 @@
+-rootPath
+/home/tubbadu/code/Qt/KiwiNotes
+-cmake-output
+-output-file
+/home/tubbadu/code/Qt/KiwiNotes/build/.qt_plugins/Qt6_QmlPlugins_Imports_appKiwiNotes.cmake
+-importPath
+/home/tubbadu/code/Qt/KiwiNotes/build/KiwiNotes
+-importPath
+/home/tubbadu/code/Qt/KiwiNotes/build
+-importPath
+/usr/lib/qt6/qml
+-qrcFiles
+/home/tubbadu/code/Qt/KiwiNotes/build/.rcc/qmake_KiwiNotes.qrc
+/home/tubbadu/code/Qt/KiwiNotes/build/.rcc/appKiwiNotes_raw_qml_0.qrc

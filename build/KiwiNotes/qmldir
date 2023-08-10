@@ -1,0 +1,7 @@
+module KiwiNotes
+typeinfo appKiwiNotes.qmltypes
+prefer :/KiwiNotes/
+Main 1.0 Main.qml
+Document 1.0 Document.qml
+Block 1.0 Block.qml
+
