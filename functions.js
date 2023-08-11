@@ -71,10 +71,23 @@ function assignCheckboxes(){
 
 function processToRichText(rawtext){ // this is called a single time, reading the file.md
     const regex = textarea.regex;
-    let tin = rawtext.replace(/\u2028/g, "\n"); // remove this stupid strange character and use newline instead
-    tin = tin.replace(/\n(\s*\n)+/g, "<br>") // replace 2 or more empty newlines with a single <br>
+    let tin = rawtext.replace(/\u2028/g, "\n"); // remove this stupid strange character and use newline instead (perhaps useless)
+    tin = rawtext.replace(/\u2003/g, " ");
+    tin = tin.replace(/\n\s*\n(\s*\n)+/g, "<br>") // replace 2 or more empty newlines with a single <br>
     tin = tin.replace(regex["BreakLines"], "\n<br>\n"); // isolate each <br> in a separate line
+    console.warn(tin)
+    tin = tin.replace(/^\s+/gm, (match) => {
+                        let imgWidth = textmetrics.getWidth(match);
+                        if(imgWidth > 0){
+                            if()
+                            return `<img width="${imgWidth}" height="1" src="img/transparent.png">`
+                        } else {
+                            return "";
+                        }
 
+
+                    });
+    console.warn(tin)
     let out = [];
 
 
@@ -85,6 +98,16 @@ function processToRichText(rawtext){ // this is called a single time, reading th
         }
 
         let lout = line;
+
+        lout = lout.replace(regex["Bold"], (match) => { // Bold before Italic!!!
+            let boldText = match.replace(/^\*\*/g, "").replace(/\*\*$/g, "");
+            return `<b>${boldText}</b>`
+        });
+        lout = lout.replace(regex["Italic"], (match) => {
+            let italicText = match.replace(/^\*/g, "").replace(/\*$/g, "");
+            return `<i>${italicText}</i>`
+        });
+
         if(regex["CheckBoxOff"].test(line)){
             lout = lout.replace(regex["CheckBoxOff"], (match) => {
                 let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
@@ -98,12 +121,11 @@ function processToRichText(rawtext){ // this is called a single time, reading th
             });
         }
 
-        if(regex["BreakLines"].test(line)){
-            lout = "<br>"
+        if(regex["BreakLines"].test(line) | line.trim() === "<br>"){ // TODO fix the regex
+            lout = '<p style="margin: 0px;">&nbsp;</p>';
         } else if(regex["Header"].test(line)){
-            console.warn("header!", line)
-             // is a header
-             lout = lout.replace(regex["Header"], (match) => {
+            // is a header
+            lout = lout.replace(regex["Header"], (match) => {
                 let hashtagsRegex = /^#+/;
                 let hashtags = match.trim().match(hashtagsRegex);
                 let titleNum = hashtags ? hashtags[0].length : 0;
@@ -113,17 +135,15 @@ function processToRichText(rawtext){ // this is called a single time, reading th
             });
         } else {
             // is a paragraph (perhaps with other formatting, who knows)
-            lout = (`<p style="margin: 0px;">${lout}`);
+            lout = (`<p style="margin: 0px;">${lout}</p>`);
         }
-
-        out.push(lout)
+        out.push(lout);
     });
 
 
 
 
-
-    console.warn(out.join('\n'))
+    //console.warn(out.join('\n'))
     return out.join('\n');
 
 

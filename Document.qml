@@ -14,8 +14,9 @@ ScrollView{
         width: parent.width
         readonly property string userText: getText(0, length)
         textFormat: TextEdit.RichText
-        text: `
+        property string intext: `
 # Documento di Esempio
+
 
 ## Elenchi
 - Elemento 1 dell'elenco puntato
@@ -31,10 +32,14 @@ ScrollView{
 - [x] Un'altra attività completata
 - https://google.it
 
+<br>
+<br>
+<br>
+
 > Questa è una citazione dal testo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 ## Altro Contenuto
-Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`.replace(/\n/g, "<br>");
+Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`;
         color: "black"
 
         property var checkboxItemList: new Set();
@@ -58,7 +63,10 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`.re
             "Quote": /^(?:\t| )*> /gm,
             "EmptyLine": /^\s*\n/gm,
             "Nothing": /^(?!(\s*#+ |\s*<br>\s*)).*$/gm,
-            "BreakLines": /<\s*br\s*\/?\s*>/g
+            "BreakLines": /<\s*br\s*\/?\s*>/g, // TODO fix
+            "Bold": /\*\*([^*]+)\*\*/g,
+            "Italic": /\*([^*]+)\*/g,
+
         }
 
         wrapMode: TextEdit.Wrap
@@ -68,7 +76,9 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`.re
             F.assignCheckboxes()
         }
         Component.onCompleted: {
-            textarea.text = F.processToRichText(getText(0, length))
+            let t = F.processToRichText(intext);
+            textarea.text = t;
+            //console.warn(t, "\n\n\n\n\n\n", textarea.text)
         }
 
         TextMetrics {
