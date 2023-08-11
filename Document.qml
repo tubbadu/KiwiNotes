@@ -5,42 +5,6 @@ import QtQuick.Layouts
 
 import "functions.js" as F
 
-/*ListView  {
-    id: listview
-    model: blockModel
-    delegate: blockDelegate
-    //highlight: highlight
-    highlightFollowsCurrentItem: true
-    highlightMoveDuration: 0
-    highlightResizeDuration: 0
-
-    function insertBlock(){
-        blockModel.append({set_text: "newtext"})
-    }
-
-    ListModel {
-        id: blockModel
-    }
-
-    Component {
-        id: blockDelegate
-        Block{
-            id: blk
-            text: set_text
-        }
-    }
-
-    Component {
-        id: highlight
-        Rectangle {
-            width: 180
-            height: 40
-            color: window.active? "cyan" : "transparent";
-            //border.width: 1
-        }
-    }
-}
-*/
 
 ScrollView{
     anchors.fill: parent
@@ -65,6 +29,7 @@ ScrollView{
 - [x] Attività completata
 - [ ] Attività da fare
 - [x] Un'altra attività completata
+- https://google.it
 
 > Questa è una citazione dal testo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
@@ -90,7 +55,10 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`.re
             "CheckBoxOff": /^(?:\t| )*[-*+] \[ \] /gm,
             "Header": /^(?:\t| )*#+ .*$/gm,
             "DotList": /^(?:\t| )*[-*+] /gm,
-            "Quote": /^(?:\t| )*> /gm
+            "Quote": /^(?:\t| )*> /gm,
+            "EmptyLine": /^\s*\n/gm,
+            "Nothing": /^(?!(\s*#+ |\s*<br>\s*)).*$/gm,
+            "BreakLines": /<\s*br\s*\/?\s*>/g
         }
 
         wrapMode: TextEdit.Wrap
@@ -98,11 +66,9 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`.re
 
         onTextChanged: {
             F.assignCheckboxes()
-            console.warn("\n\n\n\n\n", text)
         }
         Component.onCompleted: {
             textarea.text = F.processToRichText(getText(0, length))
-
         }
 
         TextMetrics {

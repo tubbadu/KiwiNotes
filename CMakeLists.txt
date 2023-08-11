@@ -20,7 +20,7 @@ qt_add_qml_module(appKiwiNotes
     VERSION 1.0
     QML_FILES Main.qml
     QML_FILES Document.qml
-    QML_FILES Block.qml
+    QML_FILES
     QML_FILES CheckBoxItem.qml
     QML_FILES functions.js
     #RESOURCES resources.qrc

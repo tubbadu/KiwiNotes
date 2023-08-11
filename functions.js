@@ -69,21 +69,96 @@ function assignCheckboxes(){
     });
 }
 
-function processToRichText(text){
+function processToRichText(rawtext){ // this is called a single time, reading the file.md
     const regex = textarea.regex;
-    let tout = text.replace(/\u2028/g, "\n"); // remove this stupid strange character and use newline instead
+    let tin = rawtext.replace(/\u2028/g, "\n"); // remove this stupid strange character and use newline instead
+    tin = tin.replace(/\n(\s*\n)+/g, "<br>") // replace 2 or more empty newlines with a single <br>
+    tin = tin.replace(regex["BreakLines"], "\n<br>\n"); // isolate each <br> in a separate line
 
-    tout = tout.replace(textarea.d["CheckBoxOff"]["regex"], (match) => {
-                            console.warn(`<${match}>`)
+    let out = [];
+
+
+    tin.trim().split("\n").forEach(line => {
+        if(line.trim().length === 0){
+            // is an empty line. ignore
+            return;
+        }
+
+        let lout = line;
+        if(regex["CheckBoxOff"].test(line)){
+            lout = lout.replace(regex["CheckBoxOff"], (match) => {
+                let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
+                return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
+            });
+        }
+        if(regex["CheckBoxOn"].test(line)){
+            lout = lout.replace(regex["CheckBoxOn"], (match) => {
+                let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
+                return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
+            });
+        }
+
+        if(regex["BreakLines"].test(line)){
+            lout = "<br>"
+        } else if(regex["Header"].test(line)){
+            console.warn("header!", line)
+             // is a header
+             lout = lout.replace(regex["Header"], (match) => {
+                let hashtagsRegex = /^#+/;
+                let hashtags = match.trim().match(hashtagsRegex);
+                let titleNum = hashtags ? hashtags[0].length : 0;
+                let rawText = match.trim().replace(hashtagsRegex, '');
+
+                return `<h${titleNum}>${rawText}</h${titleNum}>`;
+            });
+        } else {
+            // is a paragraph (perhaps with other formatting, who knows)
+            lout = (`<p style="margin: 0px;">${lout}`);
+        }
+
+        out.push(lout)
+    });
+
+
+
+
+
+    console.warn(out.join('\n'))
+    return out.join('\n');
+
+
+    let tout = rawtext.replace(/\u2028/g, "\n"); // remove this stupid strange character and use newline instead
+    //tout = tout.replace(/\n\s*\n/g, "\n<br>\n")
+    console.warn(tout)
+    tout = tout.replace(regex["Nothing"], (match) => {
+        if(match.trim().length > 0){
+            return `<p style="margin: 0px;">${match}</p>`
+        } else {
+            return '<br>'
+        }
+    });
+
+
+
+    tout = tout.replace(regex["CheckBoxOff"], (match) => {
         let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
         return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
     });
-    tout = tout.replace(textarea.d["CheckBoxOn"]["regex"], (match) => {
+    tout = tout.replace(regex["CheckBoxOn"], (match) => {
         let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
         return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
     });
-    tout = tout.replace(textarea)
+    tout = tout.replace(regex["Header"], (match) => {
+        let hashtagsRegex = /^#+/;
+        let hashtags = match.trim().match(hashtagsRegex);
+        let titleNum = hashtags ? hashtags[0].length : 0;
+        let rawText = match.trim().replace(hashtagsRegex, '');
 
-    tout = tout.replace(/\n/g, "<br>"); // display correctly newlines in RichText
+        return `<h${titleNum}>${rawText}</h${titleNum}>`;
+    })
+
+    //tout = tout.replace(regex["EmptyLine"], '<br>\n') // check
+
+    console.warn(tout)
     return tout;
 }
