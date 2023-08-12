@@ -6,6 +6,9 @@ import QtQuick.Layouts
 import "functions.js" as F
 
 
+
+
+
 ScrollView{
     anchors.fill: parent
 
@@ -20,6 +23,7 @@ ScrollView{
 
 ## Elenchi
 - Elemento 1 dell'elenco puntato
+
 - Elemento 2 dell'elenco puntato
   - Sottoelemento 2.1
   - Sottoelemento 2.2
@@ -60,7 +64,7 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`;
             "CheckBoxOff": /^(?:\t| )*[-*+] \[ \] /gm,
             "Header": /^(?:\t| )*#+ .*$/gm,
             "DotList": /^(?:\t| )*[-*+] /gm,
-            "Quote": /^(?:\t| )*> /gm,
+            "Quote": /^(?:\t| )*> .*$/gm,
             "EmptyLine": /^\s*\n/gm,
             "Nothing": /^(?!(\s*#+ |\s*<br>\s*)).*$/gm,
             "BreakLines": /<\s*br\s*\/?\s*>/g, // TODO fix
@@ -73,7 +77,8 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`;
         tabStopDistance: 30 // TODO make it compatible with everything
 
         onTextChanged: {
-            F.assignCheckboxes()
+            //F.assignCheckboxes()
+            console.warn(text)
         }
         Component.onCompleted: {
             let t = F.processToRichText(intext);
@@ -90,6 +95,3 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`;
         }
     }
 }
-
-
-

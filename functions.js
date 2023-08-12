@@ -79,7 +79,7 @@ function processToRichText(rawtext){ // this is called a single time, reading th
     tin = tin.replace(/^\s+/gm, (match) => {
                         let imgWidth = textmetrics.getWidth(match);
                         if(imgWidth > 0){
-                            if()
+                            //if()
                             return `<img width="${imgWidth}" height="1" src="img/transparent.png">`
                         } else {
                             return "";
@@ -133,6 +133,15 @@ function processToRichText(rawtext){ // this is called a single time, reading th
 
                 return `<h${titleNum}>${rawText}</h${titleNum}>`;
             });
+        } else if (regex["Quote"].test(line)){
+                                            // is a quote
+                                            lout = lout.replace(regex["Quote"], (match) => {
+                                                let quoteRegex = /^>/;
+                                                let hashtags = match.trim().match(quoteRegex);
+                                                let rawText = match.trim().replace(quoteRegex, '');
+
+                                                return `<p style="margin: 0px;"><img width="${textarea.tabStopDistance}" height="1" src="img/transparent.png">${rawText}</p}>`;
+                                            });
         } else {
             // is a paragraph (perhaps with other formatting, who knows)
             lout = (`<p style="margin: 0px;">${lout}</p>`);
@@ -162,11 +171,11 @@ function processToRichText(rawtext){ // this is called a single time, reading th
 
     tout = tout.replace(regex["CheckBoxOff"], (match) => {
         let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
-        return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
+        return `<span style="color: transparent">${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
     });
     tout = tout.replace(regex["CheckBoxOn"], (match) => {
         let imgWidth = textarea.tabStopDistance - textmetrics.getWidth(match) //- textmetrics.getWidth(" ")
-        return `<span style="color: transparent";>${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
+        return `<span style="color: transparent">${match}</span><img width="${imgWidth}" height="1" src="img/transparent.png">`;
     });
     tout = tout.replace(regex["Header"], (match) => {
         let hashtagsRegex = /^#+/;
