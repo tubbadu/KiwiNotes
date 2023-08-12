@@ -191,3 +191,22 @@ function processToRichText(rawtext){ // this is called a single time, reading th
     console.warn(tout)
     return tout;
 }
+
+
+
+
+function processMarkdown(text){
+    const regex = textarea.regex;
+    let tout = text + "";
+    tout = tout.replace(/\n+/g, "\n\n")
+    tout = tout.replace(/\<br\s*\/?\>/g, "<br />")
+
+    tout = tout.replace(regex["CheckBoxOff"], (match) => {
+        return `<span style="color: transparent;">${match}</span>\t`;
+    });
+    tout = tout.replace(regex["CheckBoxOn"], (match) => {
+        return `<span style="color: transparent;">${match}</span>\t`;
+    });
+    console.warn(tout)
+    return tout;
+}

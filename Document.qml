@@ -16,10 +16,9 @@ ScrollView{
         id: textarea
         width: parent.width
         readonly property string userText: getText(0, length)
-        textFormat: TextEdit.RichText
+        textFormat: TextEdit.MarkdownText
         property string intext: `
 # Documento di Esempio
-
 
 ## Elenchi
 - Elemento 1 dell'elenco puntato
@@ -37,8 +36,8 @@ ScrollView{
 - https://google.it
 
 <br>
-<br>
-<br>
+<br/>
+<br />
 
 > Questa è una citazione dal testo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
@@ -74,16 +73,20 @@ Ecco del testo normale e *cursivo*, **grassetto** e ***grassetto corsivo***.`;
         }
 
         wrapMode: TextEdit.Wrap
-        tabStopDistance: 30 // TODO make it compatible with everything
+        tabStopDistance: 25 // TODO make it compatible with everything
 
         onTextChanged: {
-            //F.assignCheckboxes()
-            console.warn(text)
+            F.assignCheckboxes()
+            //console.warn(text)
         }
         Component.onCompleted: {
-            let t = F.processToRichText(intext);
+            let t = F.processMarkdown(intext);
             textarea.text = t;
             //console.warn(t, "\n\n\n\n\n\n", textarea.text)
+        }
+
+        onLinkActivated: (link) => {
+            Qt.openUrlExternally(link);
         }
 
         TextMetrics {
